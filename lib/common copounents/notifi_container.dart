@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:rct/common%20copounents/pop_up.dart';
 import 'package:rct/constants/constants.dart';
-import 'package:rct/constants/routes_config.dart';
 import 'package:rct/view/home_screen.dart';
 import 'package:rct/view/notification%20screens/payment_recipt_screen.dart';
 
@@ -20,6 +20,7 @@ class NotifiContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var local = AppLocalizations.of(context)!;
     return Center(
       child: Container(
         margin: const EdgeInsets.all(10),
@@ -53,22 +54,22 @@ class NotifiContainer extends StatelessWidget {
               TextButton(
                 onPressed: () => type == "payment"
                     ? Navigator.pushNamed(
-                        context, const PaymentReciptScreen().screenId)
+                    context, const PaymentReciptScreen().screenId)
                     : showDialog(
-                        context: context,
-                        builder: (BuildContext context) {
-                          return ShowPopUp(
-                            title: Center(
-                              child: Image.asset(
-                                "assets/icons/popUp-icon.png",
-                                height: 50.h,
-                                width: 50.w,
-                              ),
-                            ),
-                            content: const ListTile(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return ShowPopUp(
+                        title: Center(
+                          child: Image.asset(
+                            "assets/icons/popUp-icon.png",
+                            height: 50.h,
+                            width: 50.w,
+                          ),
+                        ),
+                        content: ListTile(
                               titleAlignment: ListTileTitleAlignment.center,
-                              title: Text("تم إرسال الرد بنجاح"),
-                              subtitle: Text("سيصلك اشعار حول سداد الدفعة"),
+                              title: Text(local.replySentSuccessfully),
+                              subtitle: Text(local.paymentNotification),
                             ),
                             ontap: () => Navigator.of(context)
                                 .pushNamedAndRemoveUntil(
@@ -79,7 +80,7 @@ class NotifiContainer extends StatelessWidget {
                     backgroundColor: MaterialStatePropertyAll(
                   Colors.green,
                 )),
-                child: const Text("قبول"),
+                child: Text(local.accept),
               ),
               TextButton(
                 onPressed: () => showDialog(
@@ -87,7 +88,7 @@ class NotifiContainer extends StatelessWidget {
                     builder: (BuildContext context) {
                       return ShowPopUp(
                         title: Text(
-                          "سيتم إلغاء الطلب هل انت متأكد من الالغاء",
+                          local.cancelRequestConfirmation,
                           style: Theme.of(context).textTheme.bodyLarge,
                         ),
                         content: Row(
@@ -95,17 +96,17 @@ class NotifiContainer extends StatelessWidget {
                           children: [
                             TextButton(
                               onPressed: () => Navigator.pop(context),
-                              child: const Text("الغاء"),
+                              child: Text(local.reject),
                             ),
                             TextButton(
                               style: ButtonStyle(
                                   backgroundColor: MaterialStatePropertyAll(
-                                primaryColor,
-                              )),
+                                    primaryColor,
+                                  )),
                               onPressed: () => Navigator.pushNamed(
                                   context, HomeScreen.id),
                               child: Text(
-                                "موافق",
+                                local.ok,
                                 style: TextStyle(
                                   color: whiteBackGround,
                                 ),
@@ -115,7 +116,7 @@ class NotifiContainer extends StatelessWidget {
                         ),
                         ontap: () => Navigator.of(context)
                             .pushNamedAndRemoveUntil(
-                               HomeScreen.id, (route) => false),
+                                HomeScreen.id, (route) => false),
                         showbutton: false,
                       );
                     }),
@@ -123,15 +124,15 @@ class NotifiContainer extends StatelessWidget {
                     backgroundColor: MaterialStatePropertyAll(
                   Colors.red,
                 )),
-                child: const Text("رفض"),
+                child: Text(local.reject),
               ),
             ],
           ),
           trailing: Text(
             time,
             style: Theme.of(context).textTheme.labelLarge!.copyWith(
-                  color: Colors.blue,
-                ),
+              color: Colors.blue,
+            ),
           ),
         ),
       ),

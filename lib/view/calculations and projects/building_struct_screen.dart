@@ -2,7 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:provider/provider.dart';
 import 'package:rct/common%20copounents/app_bar_back_button.dart';
@@ -42,6 +42,8 @@ class _BuildingStructScreenState extends State<BuildingStructScreen> {
 
   @override
   Widget build(BuildContext context) {
+    var local = AppLocalizations.of(context)!;
+
     return Scaffold(
       appBar: BackButtonAppBar(context),
       body: BlocBuilder<TypesCubit, TypesState>(
@@ -77,7 +79,7 @@ class _BuildingStructScreenState extends State<BuildingStructScreen> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      "آلية البناء",
+                      local.buildingMechanism,
                       style: Theme.of(context).textTheme.bodyLarge,
                     ),
                     SizedBox(height: constVerticalPadding),
@@ -98,48 +100,48 @@ class _BuildingStructScreenState extends State<BuildingStructScreen> {
                             selectedId = nameToDetails[newValue]!['id'];
                             selectedPrice = nameToDetails[newValue]!['price'];
                             // _selectedType = nameToDetails[newValue]!['name'];
-                            print(_selectedType == "مجمع سكنى");
+                            print(_selectedType == local.residentialComplex);
                           });
                         },
-                        hint: "اختر النوع",
+                        hint: local.chooseType,
                       ),
                     ),
                     SizedBox(height: constVerticalPadding),
                     Center(
                       child: showButton
                           ? _selectedType == "مجمع سكنى"
-                              ? Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      "عدد الأدوار",
+                          ? Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            local.numberOfFloors,
                                       style:
                                           Theme.of(context).textTheme.bodyLarge,
                                     ),
-                                    SizedBox(height: constVerticalPadding),
-                                    TextFormFieldCustom(
-                                      context: context,
-                                      labelText: "ادخل عدد الأدوار",
+                          SizedBox(height: constVerticalPadding),
+                          TextFormFieldCustom(
+                            context: context,
+                                      labelText: local.enterNumberOfFloors,
                                       controller: floorsController,
                                       onChanged: (value) {},
                                     ),
-                                    SizedBox(height: constVerticalPadding),
-                                    Text(
-                                      "عدد الشقق",
+                          SizedBox(height: constVerticalPadding),
+                          Text(
+                            local.numberOfApartments,
                                       style:
                                           Theme.of(context).textTheme.bodyLarge,
                                     ),
-                                    SizedBox(height: constVerticalPadding),
-                                    TextFormFieldCustom(
-                                      context: context,
-                                      labelText: "ادخل عدد الشقق",
+                          SizedBox(height: constVerticalPadding),
+                          TextFormFieldCustom(
+                            context: context,
+                                      labelText: local.enterNumberOfApartments,
                                       onChanged: (value) {},
                                       controller: apartmentController,
                                     ),
-                                    SizedBox(height: constVerticalPadding),
-                                    Center(
-                                      child: MainButton(
-                                        text: "التالي",
+                          SizedBox(height: constVerticalPadding),
+                          Center(
+                            child: MainButton(
+                              text: local.next,
                                         backGroundColor: primaryColor,
                                         onTap: () {
                                           orderModel.type_id = selectedId!;
@@ -150,11 +152,11 @@ class _BuildingStructScreenState extends State<BuildingStructScreen> {
                                               AppRoutes.floorDetails);
                                         },
                                       ),
-                                    ),
-                                  ],
-                                )
-                              : MainButton(
-                                  text: "التالي",
+                          ),
+                        ],
+                      )
+                          : MainButton(
+                        text: local.next,
                                   backGroundColor: primaryColor,
                                   onTap: () {
                                     orderModel.type_id = selectedId!;

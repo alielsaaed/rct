@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:provider/provider.dart';
 import 'package:rct/common%20copounents/app_bar_back_button.dart';
@@ -12,6 +13,7 @@ import 'package:rct/view-model/services/create_areaspace.dart';
 
 class MeasurmentOfFieldScreen extends StatefulWidget {
   static String id = "MeasurmentOfFieldScreen";
+
   const MeasurmentOfFieldScreen({super.key});
 
   @override
@@ -27,7 +29,7 @@ class _MeasurmentOfFieldScreenState extends State<MeasurmentOfFieldScreen> {
   @override
   Widget build(BuildContext context) {
     OrderModel orderModel = Provider.of<OrderModel>(context, listen: false);
-
+    var local = AppLocalizations.of(context)!;
     return ModalProgressHUD(
       inAsyncCall: isLoading,
       child: Scaffold(
@@ -41,7 +43,7 @@ class _MeasurmentOfFieldScreenState extends State<MeasurmentOfFieldScreen> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    "مساحة الأرض الإجمالية",
+                    local.totalLandArea,
                     style: Theme.of(context).textTheme.bodyLarge!.copyWith(
                           fontWeight: mainFontWeight,
                         ),
@@ -49,7 +51,7 @@ class _MeasurmentOfFieldScreenState extends State<MeasurmentOfFieldScreen> {
                   SizedBox(height: constVerticalPadding),
                   TextFormFieldCustom(
                     context: context,
-                    labelText: "يرجى إدخال المساحة الإجمالية",
+                    labelText: local.pleaseEnterTotalArea,
                     onChanged: (value) {},
                     controller: controller,
                     border: true,
@@ -60,7 +62,7 @@ class _MeasurmentOfFieldScreenState extends State<MeasurmentOfFieldScreen> {
                   ),
                   Center(
                     child: MainButton(
-                      text: "التالي",
+                      text: local.next,
                       backGroundColor: primaryColor,
                       onTap: () async {
                         if (formKey.currentState!.validate()) {
@@ -88,7 +90,7 @@ class _MeasurmentOfFieldScreenState extends State<MeasurmentOfFieldScreen> {
                                             }),
                                             showSnackBar(
                                                 context,
-                                                "حدث خطاء برجاء المحاوله مره اخرى",
+                                                local.errorPleaseTryAgain,
                                                 redColor)
                                           }
                                   });

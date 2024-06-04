@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:rct/common%20copounents/custom_textformfield.dart';
 import 'package:rct/common%20copounents/main_button.dart';
 import 'package:rct/constants/constants.dart';
-import 'package:rct/common%20copounents/pop_up.dart';
-import 'package:rct/constants/routes_config.dart';
 import 'package:rct/view/home_screen.dart';
 
 class EditProfileScreen extends StatefulWidget {
@@ -22,6 +21,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
   TextEditingController controller3 = TextEditingController();
   @override
   Widget build(BuildContext context) {
+    var local = AppLocalizations.of(context)!;
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
@@ -37,7 +37,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
           ),
         ),
         title: Text(
-          "الملف الشخصي",
+          local.profile,
           style: Theme.of(context).textTheme.displayMedium!.copyWith(
                 color: whiteBackGround,
               ),
@@ -93,7 +93,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                               ],
                             ),
                             Text(
-                              "أحمد عبدالله",
+                              local.ahmedAbdullah,
                               style: Theme.of(context).textTheme.bodyLarge,
                             ),
                           ],
@@ -101,45 +101,45 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                       ),
                       SizedBox(height: constVerticalPadding),
                       Text(
-                        "الاسم",
+                        local.name,
                         style: Theme.of(context).textTheme.bodyLarge,
                       ),
                       SizedBox(height: constVerticalPadding),
                       TextFormFieldCustom(
                         context: context,
-                        labelText: "ادخل اسمك",
+                        labelText: local.enterYourName,
                         onChanged: (value) {},
                         controller: controller1,
                       ),
                       SizedBox(height: constVerticalPadding),
                       Text(
-                        "الهاتف",
+                        local.phone,
                         style: Theme.of(context).textTheme.bodyLarge,
                       ),
                       SizedBox(height: constVerticalPadding),
                       TextFormFieldCustom(
                         context: context,
-                        labelText: "ادخل رقم الهاتف",
+                        labelText: local.enterPhoneNumber,
                         onChanged: (value) {},
                         controller: controller2,
                         number: true,
                       ),
                       SizedBox(height: constVerticalPadding),
                       Text(
-                        "الإيميل",
+                        local.email,
                         style: Theme.of(context).textTheme.bodyLarge,
                       ),
                       SizedBox(height: constVerticalPadding),
                       TextFormFieldCustom(
                         context: context,
-                        labelText: "ادخل الإيميل",
+                        labelText: local.enterEmail,
                         onChanged: (value) {},
                         controller: controller3,
                         number: true,
                       ),
                       SizedBox(height: constVerticalPadding),
                       MainButton(
-                        text: "حفظ",
+                        text: local.save,
                         backGroundColor: primaryColor,
                         onTap: () => Navigator.pushNamedAndRemoveUntil(
                             context, HomeScreen.id, (route) => false),

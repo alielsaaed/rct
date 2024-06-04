@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:rct/common%20copounents/app_bar_back_button.dart';
-import 'package:rct/common%20copounents/notifi_history_container.dart';
 import 'package:rct/common%20copounents/notifi_container.dart';
 import 'package:rct/constants/constants.dart';
 import 'package:rct/view-model/cubits/notifications/notifications_cubit.dart';
@@ -31,6 +31,7 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
 
   @override
   Widget build(BuildContext context) {
+    var local = AppLocalizations.of(context)!;
     return BlocBuilder<NotificationsCubit, NotificationsState>(
       builder: (context, state) {
         if (state is NotificationsLoading) {
@@ -38,8 +39,8 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
         } else if (state is NotificationsFailure) {
           isloading = false;
           showSnackBar(context, state.errMessage, redColor);
-          return const Center(
-            child: Text("حدث خطااثناء التحميل ، حاول مره اخرى"),
+          return Center(
+            child: Text(local.loadingError),
           );
         } else if (state is NotificationsSuccess) {
           isloading = false;
@@ -54,20 +55,20 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
               child: Column(
                 children: [
                   data.isEmpty
-                      ? const Center(
-                          child: Text("لا يوجد اشعارات"),
+                      ? Center(
+                          child: Text(local.noNotifications),
                         )
                       : ListView.builder(
                           shrinkWrap: true,
                           itemCount: data.length,
                           itemBuilder: (context, index) => NotifiContainer(
                             blackText: data[index]["text"],
-                            blueText: " ينتهي خلال ٣ ايام",
+                            blueText: local.expiresIn3Days,
                             time: timeDifferenceFromNow(
                                 data[index]["updated_at"]),
                             type: "payment",
                           ),
-                        ),
+                  ),
                   // const NotifiContainer(
                   //   blackText: "لديك طلب سداد دفعة برقم طلب",
                   //   blueText: "85737685648 ينتهي خلال ٣ ايام",

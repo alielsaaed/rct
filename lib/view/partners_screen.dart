@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:rct/common%20copounents/app_bar_back_button.dart';
 import 'package:rct/constants/constants.dart';
@@ -8,6 +9,8 @@ class PartnersScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var local = AppLocalizations.of(context)!;
+
     final List<String> imagePaths = [
       "$iconsPath/Frame 117.png",
       "$iconsPath/Frame 118.png",
@@ -26,7 +29,7 @@ class PartnersScreen extends StatelessWidget {
         child: Column(
           children: [
             Text(
-              "شركاء النجاح",
+              local.successPartners,
               style: Theme.of(context).textTheme.displayMedium!.copyWith(
                     fontWeight: mainFontWeight,
                   ),

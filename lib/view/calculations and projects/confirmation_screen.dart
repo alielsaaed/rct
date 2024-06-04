@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:provider/provider.dart';
@@ -12,7 +13,6 @@ import 'package:rct/common%20copounents/pop_up.dart';
 import 'package:rct/constants/constants.dart';
 import 'package:rct/model/order_model.dart';
 import 'package:rct/view-model/cubits/order/order_cubit.dart';
-import 'package:rct/view-model/functions/file_picker.dart';
 import 'package:rct/view-model/functions/image_picker.dart';
 import 'package:rct/view-model/functions/location_permission.dart';
 import 'package:rct/view-model/functions/snackbar.dart';
@@ -32,6 +32,7 @@ class _ConfirmationScreenState extends State<ConfirmationScreen> {
   @override
   Widget build(BuildContext context) {
     OrderModel orderModel = Provider.of<OrderModel>(context, listen: false);
+    var local = AppLocalizations.of(context)!;
 
     return Scaffold(
       appBar: BackButtonAppBar(context),
@@ -61,11 +62,10 @@ class _ConfirmationScreenState extends State<ConfirmationScreen> {
                         width: 50.w,
                       ),
                     ),
-                    content: const ListTile(
+                    content: ListTile(
                       titleAlignment: ListTileTitleAlignment.center,
-                      title: Text("تم إرسال الطلب بنجاح"),
-                      subtitle: Text(
-                          "سيتم دراسة الطلب قريباً يمكنك مراجعة الاشعارات"),
+                      title: Text(local.requestSentSuccessfully),
+                      subtitle: Text(local.requestWillBeReviewed),
                     ),
                     ontap: () => Navigator.of(context).pushNamedAndRemoveUntil(
                         HomeScreen.id, (route) => false),
@@ -83,7 +83,7 @@ class _ConfirmationScreenState extends State<ConfirmationScreen> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      "الهوية الوطنية أو السجل التجاري *",
+                      local.nationalIdOrCommercialRegister,
                       style: Theme.of(context).textTheme.bodyLarge,
                     ),
                     SizedBox(height: constVerticalPadding),
@@ -96,7 +96,7 @@ class _ConfirmationScreenState extends State<ConfirmationScreen> {
                     ),
                     SizedBox(height: constVerticalPadding),
                     Text(
-                      "الصك الإلكتروني *",
+                      local.electronicDeed,
                       style: Theme.of(context).textTheme.bodyLarge,
                     ),
                     SizedBox(height: constVerticalPadding),
@@ -109,11 +109,11 @@ class _ConfirmationScreenState extends State<ConfirmationScreen> {
                     ),
                     SizedBox(height: constVerticalPadding),
                     Text(
-                      "إضافة تقرير فحص التربة *",
+                      local.addSoilTestReport,
                       style: Theme.of(context).textTheme.bodyLarge,
                     ),
                     Text(
-                      "في حال لم يتوفر ستكون هناك تكلفة إضافية بمبلغ ٢٠٠٠ ريال",
+                      local.additionalCostIfNotAvailable,
                       style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                             color: Colors.red,
                             fontWeight: mainFontWeight,
@@ -128,7 +128,7 @@ class _ConfirmationScreenState extends State<ConfirmationScreen> {
                               : null),
                     ),
                     Text(
-                      "موقع العقار",
+                      local.propertyLocation,
                       style: Theme.of(context).textTheme.bodyLarge,
                     ),
                     SizedBox(height: constVerticalPadding),
@@ -162,7 +162,7 @@ class _ConfirmationScreenState extends State<ConfirmationScreen> {
                     SizedBox(height: constVerticalPadding),
                     TextFormFieldCustom(
                       context: context,
-                      labelText: "أو إدخال رابط الموقع",
+                      labelText: local.enterSiteLink,
                       onChanged: (value) {},
                       controller: controller,
                       // number: true,
@@ -170,7 +170,7 @@ class _ConfirmationScreenState extends State<ConfirmationScreen> {
                     SizedBox(height: constVerticalPadding),
                     Center(
                       child: MainButton(
-                          text: "إرسال",
+                          text: local.send,
                           backGroundColor: primaryColor,
                           onTap: () async {
                             await context.read<OrderCubit>().pushOrder(context);
@@ -179,7 +179,7 @@ class _ConfirmationScreenState extends State<ConfirmationScreen> {
                     SizedBox(height: constVerticalPadding),
                     Center(
                       child: MainButton(
-                        text: "إلغاء الطلب",
+                        text: local.cancelRequest,
                         backGroundColor: grey,
                         onTap: () => Navigator.of(context)
                             .pushNamedAndRemoveUntil(

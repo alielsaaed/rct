@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:rct/constants/constants.dart';
 
 class TextFormFieldCustom extends StatelessWidget {
@@ -32,18 +33,20 @@ class TextFormFieldCustom extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var local = AppLocalizations.of(context)!;
+
     return TextFormField(
         controller: value == null ? controller : null,
         initialValue: value,
         validator: (value) {
           if (value!.isEmpty) {
-            return "يرجى إدخال المطلوب";
+            return local.pleaseEnterRequiredInformation;
           }
           return null;
         },
         onChanged: (value) => onChanged(value),
         keyboardType:
-            number == true ? TextInputType.number : TextInputType.text,
+        number == true ? TextInputType.number : TextInputType.text,
         decoration: InputDecoration(
           contentPadding: length == 0 ? null : EdgeInsets.only(bottom: length),
           labelText: labelText,
@@ -51,9 +54,9 @@ class TextFormFieldCustom extends StatelessWidget {
           fillColor: grey.withOpacity(0.5),
           filled: true,
           labelStyle: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                color: darkGrey,
-                overflow: TextOverflow.clip,
-              ),
+            color: darkGrey,
+            overflow: TextOverflow.clip,
+          ),
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(15.0),
             borderSide: const BorderSide(color: Colors.transparent, width: 0),
