@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:rct/constants/constants.dart';
 import 'package:rct/common%20copounents/pop_up.dart';
+import 'package:rct/constants/constants.dart';
 import 'package:rct/constants/routes_config.dart';
 import 'package:rct/main.dart';
 import 'package:rct/view/auth/login_screen.dart';
@@ -18,6 +18,7 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var local = AppLocalizations.of(context)!;
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
@@ -29,13 +30,13 @@ class HomeScreen extends StatelessWidget {
               margin: const EdgeInsets.all(10),
               child: Image.asset(
                 "$iconsPath/drawer-icon.png",
+                  ),
+                ),
+                onTap: () => Scaffold.of(context).openDrawer(),
               ),
-            ),
-            onTap: () => Scaffold.of(context).openDrawer(),
-          ),
         ),
         title: Text(
-          "مرحبا",
+          local.welcome,
           style: Theme.of(context).textTheme.displayMedium!.copyWith(
                 color: whiteBackGround,
               ),
@@ -85,7 +86,7 @@ class HomeScreen extends StatelessWidget {
                       onTap: () => Navigator.of(context)
                           .pushNamed(const EditProfileScreen().screenId),
                       child: Text(
-                        "تعديل الملف ",
+                        local.editFile,
                         style: Theme.of(context).textTheme.titleLarge!.copyWith(
                               color: Colors.blue,
                             ),
@@ -97,9 +98,9 @@ class HomeScreen extends StatelessWidget {
             ),
             //
             ListTile(
-              title: const Text(
-                "الطلبات",
-                style: TextStyle(
+              title: Text(
+                local.orders,
+                style: const TextStyle(
                   color: Colors.blue,
                 ),
               ),
@@ -111,7 +112,7 @@ class HomeScreen extends StatelessWidget {
             const Divider(),
 
             ListTile(
-              title: const Text("المفضلة"),
+              title: Text(local.favorites),
               leading: SvgPicture.asset("$iconsPath/2.svg"),
               titleTextStyle: Theme.of(context).textTheme.titleMedium,
               onTap: () => Navigator.of(context).pushNamed(name.id),
@@ -119,7 +120,7 @@ class HomeScreen extends StatelessWidget {
 
             const Divider(),
             ListTile(
-              title: const Text("من نحن"),
+              title: Text(local.aboutUs),
               leading: SvgPicture.asset("$iconsPath/3.svg"),
               titleTextStyle: Theme.of(context).textTheme.titleMedium,
               onTap: () => Navigator.of(context).pushNamed(name.id),
@@ -127,7 +128,7 @@ class HomeScreen extends StatelessWidget {
 
             const Divider(),
             ListTile(
-              title: const Text("السياسة والخصوصية"),
+              title: Text(local.privacyPolicy),
               leading: SvgPicture.asset("$iconsPath/Vector.svg"),
               titleTextStyle: Theme.of(context).textTheme.titleMedium,
               onTap: () => Navigator.of(context).pushNamed(name.id),
@@ -135,14 +136,14 @@ class HomeScreen extends StatelessWidget {
 
             const Divider(),
             ListTile(
-              title: const Text("الشروط والآحكام"),
+              title: Text(local.termsConditions),
               leading: SvgPicture.asset("$iconsPath/Vector-1.svg"),
               titleTextStyle: Theme.of(context).textTheme.titleMedium,
               onTap: () => Navigator.of(context).pushNamed(name.id),
             ),
             const Divider(),
             ListTile(
-              title: const Text("مساعدة"),
+              title: Text(local.help),
               leading: SvgPicture.asset("$iconsPath/Vector-2.svg"),
               titleTextStyle: Theme.of(context).textTheme.titleMedium,
               onTap: () => Navigator.of(context).pushNamed(name.id),
@@ -182,9 +183,19 @@ class HomeScreen extends StatelessWidget {
             ),
             const Divider(),
             ListTile(
-              title: const Text(
-                "تسجيل الخروج",
-                style: TextStyle(
+              leading: const Icon(Icons.language),
+              title: Text(local.language),
+              titleTextStyle: Theme.of(context).textTheme.titleMedium,
+              onTap: () {
+                Navigator.of(context)
+                    .pushReplacementNamed(AppRoutes.languageScreen);
+              },
+            ),
+            const Divider(),
+            ListTile(
+              title: Text(
+                local.logout,
+                style: const TextStyle(
                   color: Colors.red,
                 ),
               ),
@@ -236,7 +247,7 @@ class HomeScreen extends StatelessWidget {
                         ),
                         child: ListTile(
                           title: Text(
-                            "الحاسبة و المشاريع",
+                            local.calculatorProjects,
                             style: Theme.of(context).textTheme.displaySmall,
                           ),
                           leading: Image.asset(
@@ -248,10 +259,9 @@ class HomeScreen extends StatelessWidget {
                               context: context,
                               builder: (BuildContext context) {
                                 return ShowPopUp(
-                                  title: const Text(
-                                      "التكلفة التقريبية كافة التفاصيل والرسوم:"),
-                                  content: const Text(
-                                      "البناء + الإستشارة + المخططات + التأمين + أعمال السور والخزانات والصرف الصحي و الحفر والردم والترحيل كما أن كافة المنتجات المستخدمة ذات جودة عالية مع توفير الضمانات اللازمة"),
+                                  title: Text(local.approximateCostDetails),
+                                  content: Text(local
+                                      .constructionConsultationPlansInsurance),
                                   ontap: () => Navigator.of(context)
                                       .pushNamed(MeasurmentOfFieldScreen.id),
                                 );
@@ -272,7 +282,7 @@ class HomeScreen extends StatelessWidget {
                           ),
                           child: ListTile(
                             title: Text(
-                              "المخططات و التصاميم",
+                              local.plansDesigns,
                               style: Theme.of(context).textTheme.displaySmall,
                             ),
                             leading: Image.asset(
@@ -280,7 +290,7 @@ class HomeScreen extends StatelessWidget {
                               width: 50,
                             ),
                             trailing:
-                                const Icon(Icons.arrow_forward_ios_rounded),
+                            const Icon(Icons.arrow_forward_ios_rounded),
                           ),
                         ),
                       ),
@@ -298,7 +308,7 @@ class HomeScreen extends StatelessWidget {
                           ),
                           child: ListTile(
                             title: Text(
-                              "شركاء النجاح",
+                              local.successPartners,
                               style: Theme.of(context).textTheme.displaySmall,
                             ),
                             leading: Image.asset(
@@ -306,7 +316,7 @@ class HomeScreen extends StatelessWidget {
                               width: 50.w,
                             ),
                             trailing:
-                                const Icon(Icons.arrow_forward_ios_rounded),
+                            const Icon(Icons.arrow_forward_ios_rounded),
                           ),
                         ),
                       ),

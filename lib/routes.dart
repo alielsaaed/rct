@@ -5,16 +5,17 @@ import 'package:rct/view/auth/login_screen.dart';
 import 'package:rct/view/auth/register_screen.dart';
 import 'package:rct/view/calculations%20and%20projects/building_struct_screen.dart';
 import 'package:rct/view/calculations%20and%20projects/confirmation_screen.dart';
+import 'package:rct/view/calculations%20and%20projects/floor_details_screen.dart';
+import 'package:rct/view/calculations%20and%20projects/measurment_of_field_screen.dart';
+import 'package:rct/view/calculations%20and%20projects/total_cost_screen.dart';
 import 'package:rct/view/designs%20and%20sketches/custom_designs_and_diagrams_screen.dart';
 import 'package:rct/view/designs%20and%20sketches/designs_and_screen.dart';
 import 'package:rct/view/designs%20and%20sketches/designs_screen.dart';
 import 'package:rct/view/designs%20and%20sketches/sketches_details_screen.dart';
 import 'package:rct/view/designs%20and%20sketches/sketches_screen.dart';
-import 'package:rct/view/calculations%20and%20projects/floor_details_screen.dart';
 import 'package:rct/view/edit_profile_screen.dart';
 import 'package:rct/view/home_screen.dart';
-import 'package:rct/view/calculations%20and%20projects/measurment_of_field_screen.dart';
-import 'package:rct/view/calculations%20and%20projects/total_cost_screen.dart';
+import 'package:rct/view/language_screen.dart';
 import 'package:rct/view/notification%20screens/notifications_screen.dart';
 import 'package:rct/view/notification%20screens/payment_recipt_screen.dart';
 import 'package:rct/view/partners_screen.dart';
@@ -42,4 +43,5 @@ Map<String, Widget Function(BuildContext)> routes = {
   AppRoutes.designAndScreen: (context) => const DesignAndScreen(),
   AppRoutes.buildingStructScreen: (context) => const BuildingStructScreen(),
   AppRoutes.partnersScreen: (context) => const PartnersScreen(),
+  AppRoutes.languageScreen: (context) => const LanguageScreen(),
 };

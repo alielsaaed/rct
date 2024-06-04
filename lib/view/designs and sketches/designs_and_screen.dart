@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'package:rct/common%20copounents/app_bar_back_button.dart';
-import 'package:rct/common%20copounents/card_container.dart';
 import 'package:rct/constants/constants.dart';
 import 'package:rct/constants/routes_config.dart';
 import 'package:rct/model/order_model.dart';
@@ -15,6 +15,7 @@ class DesignAndScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var local = AppLocalizations.of(context)!;
     List<String> items = [];
     var data = [];
 
@@ -26,7 +27,7 @@ class DesignAndScreen extends StatelessWidget {
           showSnackBar(context, state.errMessage, redColor);
         } else if (state is OrderNumberSuccess) {
           if (state.orderNumber.isEmpty) {
-            showSnackBar(context, "لا يوجد طلبات", redColor);
+            showSnackBar(context, local.noRequests, redColor);
           } else {
             data = state.orderNumber;
             items = data.map((map) => map["number"] as String).toList();
@@ -48,7 +49,7 @@ class DesignAndScreen extends StatelessWidget {
                   ),
                   SizedBox(height: constVerticalPadding),
                   Text(
-                    "الفئات",
+                    local.categories,
                     style: Theme.of(context).textTheme.bodyLarge,
                   ),
                   SizedBox(height: constVerticalPadding),
@@ -67,7 +68,7 @@ class DesignAndScreen extends StatelessWidget {
                             ),
                             child: ListTile(
                               title: Text(
-                                "المخططات",
+                                local.plans,
                                 style: Theme.of(context)
                                     .textTheme
                                     .bodyLarge!
@@ -98,7 +99,7 @@ class DesignAndScreen extends StatelessWidget {
                             ),
                             child: ListTile(
                               title: Text(
-                                "التصاميم",
+                                local.designs,
                                 style: Theme.of(context)
                                     .textTheme
                                     .bodyLarge!
@@ -133,7 +134,7 @@ class DesignAndScreen extends StatelessWidget {
                         child: ListTile(
                           titleAlignment: ListTileTitleAlignment.center,
                           title: Text(
-                            "مخططات وتصاميم حسب الرغبة",
+                            local.customPlansAndDesigns,
                             style:
                                 Theme.of(context).textTheme.bodyLarge!.copyWith(
                                       color: const Color(0xFF2D8386),

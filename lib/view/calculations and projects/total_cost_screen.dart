@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'package:rct/common%20copounents/app_bar_back_button.dart';
 import 'package:rct/common%20copounents/custom_checkbox.dart';
-import 'package:rct/common%20copounents/custom_textFormField.dart';
 import 'package:rct/common%20copounents/main_button.dart';
 import 'package:rct/constants/constants.dart';
 import 'package:rct/constants/routes_config.dart';
 import 'package:rct/model/order_model.dart';
-import 'package:rct/view/calculations%20and%20projects/floor_details_screen.dart';
 
 class TotalCostScreen extends StatefulWidget {
   const TotalCostScreen({super.key});
@@ -25,6 +24,7 @@ class _TotalCostScreenState extends State<TotalCostScreen> {
   @override
   Widget build(BuildContext context) {
     OrderModel orderModel = Provider.of<OrderModel>(context, listen: false);
+    var local = AppLocalizations.of(context)!;
 
     return Scaffold(
       appBar: BackButtonAppBar(context),
@@ -35,7 +35,7 @@ class _TotalCostScreenState extends State<TotalCostScreen> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
-              "التكلفة الإجمالية للمشروع",
+              local.totalProjectCost,
               style: Theme.of(context).textTheme.bodyLarge,
             ),
             SizedBox(height: constVerticalPadding),
@@ -48,7 +48,7 @@ class _TotalCostScreenState extends State<TotalCostScreen> {
               width: 400.w,
               height: 50.h,
               child: Text(
-                "${orderModel.cost} ريال",
+                "${orderModel.cost} ${local.sar}",
                 style: Theme.of(context).textTheme.bodyLarge,
               ),
             ),
@@ -74,19 +74,19 @@ class _TotalCostScreenState extends State<TotalCostScreen> {
                     },
                   ),
                 ),
-                const Text("الموافقة على الشروط والأحكام للإطلاع على "),
-                Text(
-                  "الشروط والأحكام",
-                  style: Theme.of(context).textTheme.labelLarge!.copyWith(
-                        color: Colors.blue,
-                      ),
-                ),
+                Text(local.agreeToTermsAndConditions),
               ],
+            ),
+            Text(
+              local.termsConditions,
+              style: Theme.of(context).textTheme.labelLarge!.copyWith(
+                    color: Colors.blue,
+                  ),
             ),
             SizedBox(height: constVerticalPadding),
             showButton
                 ? MainButton(
-                    text: "التالي",
+                    text: local.next,
                     backGroundColor: primaryColor,
                     onTap: () => Navigator.of(context)
                         .pushNamed(AppRoutes.confirmationScreen),

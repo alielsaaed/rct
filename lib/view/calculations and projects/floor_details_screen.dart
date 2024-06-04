@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:provider/provider.dart';
 import 'package:rct/common%20copounents/app_bar_back_button.dart';
-import 'package:rct/common%20copounents/custom_textFormField.dart';
 import 'package:rct/common%20copounents/main_button.dart';
 import 'package:rct/constants/constants.dart';
 import 'package:rct/constants/routes_config.dart';
@@ -37,6 +37,7 @@ class _FloorDetailsScreenState extends State<FloorDetailsScreen> {
   @override
   Widget build(BuildContext context) {
     OrderModel orderModel = Provider.of<OrderModel>(context, listen: false);
+    var local = AppLocalizations.of(context)!;
 
     return BlocBuilder<BuildTypesAndFloorsCubit, BuildTypesAndFloorsState>(
       builder: (context, state) {
@@ -81,7 +82,7 @@ class _FloorDetailsScreenState extends State<FloorDetailsScreen> {
                         ),
                       ),
                       Text(
-                        "نوع البناء",
+                        local.typeOfBuilding,
                         style: Theme.of(context).textTheme.bodyLarge!.copyWith(
                               fontWeight: mainFontWeight,
                             ),
@@ -99,7 +100,7 @@ class _FloorDetailsScreenState extends State<FloorDetailsScreen> {
                       SizedBox(height: constVerticalPadding),
                       Center(
                         child: MainButton(
-                          text: "التالي",
+                          text: local.next,
                           backGroundColor: primaryColor,
                           onTap: () {
                             if (selectedName != null && selectedPrice != null) {
